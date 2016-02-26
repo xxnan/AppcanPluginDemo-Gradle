@@ -16,12 +16,12 @@ AppCan Android 插件demo
 
 ###插件制作步骤
 
-1、 参考Demo工程编写调试好插件
-2、 将`build.gradle`中的`apply plugin: 'com.android.application'`修改成`apply plugin: 'com.android.library'`
-3、 make插件工程，拷贝`build->outputs->aar->***.aar`至插件包`jar`目录下，重命名为插件名称。
-4、 用压缩工具打开aar，删除`assets`目录。
-5、 填写`info.xml`,制作插件包。
-6、 将`build.gradle`中的`apply plugin: 'com.android.library'`修改成`apply plugin: 'com.android.application'`
+1、 参考Demo工程编写调试好插件  
+2、 将`build.gradle`中的`apply plugin: 'com.android.application'`修改成`apply plugin: 'com.android.library'`  
+3、 make插件工程，拷贝`build->outputs->aar->***.aar`至插件包`jar`目录下，重命名为插件名称。  
+4、 用压缩工具打开aar，删除`assets`目录。  
+5、 填写`info.xml`,制作插件包。  
+6、 将`build.gradle`中的`apply plugin: 'com.android.library'`修改成`apply plugin: 'com.android.application'`  
 
 
 附上一个[Android Studio插件 for AppCan](https://plugins.jetbrains.com/plugin/7797?pr=idea),
