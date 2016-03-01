@@ -13,14 +13,15 @@ AppCan Android 插件demo
 * 由于要启动的`Activity`在引擎的`aar`里面,IDE目前不能识别,直接run插件工程会不能启动应用,需要手动点击应用或者在IDE指定启动的`Activity`
 * `aar`只能在Gradle编译环境下使用.建议不支持的企业版打包服务升级.
 * 由于打包服务器暂时不能连外网,远程依赖不能用.╮(╯▽╰)╭
+* `plugin.xml`打包时不能自动merge，需要手动复制到插件包目录下。  
 
 ###插件制作步骤
 
 1、 参考Demo工程编写调试好插件  
 2、 将`build.gradle`中的`apply plugin: 'com.android.application'`修改成`apply plugin: 'com.android.library'`  
 3、 make插件工程，拷贝`build->outputs->aar->***.aar`至插件包`jar`目录下，重命名为插件名称。  
-4、 用压缩工具打开aar，删除`assets`目录,删除`AndroidManifest.xml`的`minSdkVersion`。  
-5、 填写`info.xml`,制作插件包。  
+4、 用压缩工具打开aar，删除`assets`目录,删除`AndroidManifest.xml`的`minSdkVersion`，删除`plugin.xml`文件  
+5、 复制`plugin.xml`文件到插件包目录,填写`info.xml`,制作插件包。  
 6、 将`build.gradle`中的`apply plugin: 'com.android.library'`修改成`apply plugin: 'com.android.application'`  
 
 
