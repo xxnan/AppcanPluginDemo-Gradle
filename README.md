@@ -24,6 +24,10 @@ AppCan Android 插件demo
 5、 复制`plugin.xml`文件到插件包目录,填写`info.xml`,制作插件包。  
 6、 将`build.gradle`中的`apply plugin: 'com.android.library'`修改成`apply plugin: 'com.android.application'`  
 
+如果是封装第三方SDK，需要通过config.xml配置appkey，插件包下面放一份`AndroidManifest.xml`，里面只包含需要替换的部分，**同时删掉aar里面对应的内容**，可以参考[融云插件](https://github.com/android-plugin/uexRongCloud)
+
+
+
 
 附上一个[Android Studio插件 for AppCan](https://plugins.jetbrains.com/plugin/7797?pr=idea),
 可以初始化工程，根据`plugin.xml`生成代码。有兴趣的可以了解使用一下，欢迎提意见和建议。
