@@ -32,3 +32,18 @@ AppCan Android 插件demo
 附上一个[Android Studio插件 for AppCan](https://plugins.jetbrains.com/plugin/7797?pr=idea),
 可以初始化工程，根据`plugin.xml`生成代码。有兴趣的可以了解使用一下，欢迎提意见和建议。
 
+
+
+### 不使用aar出包方法
+
+把插件相关的资源都放到插件文件夹之后执行：
+
+```sh
+gradle buildPlugin
+```
+
+以上命令执行的操作为：
+
+- 生成插件工程src部分的jar
+- 生成dex之后的jar
+- 生成插件包(在插件工程根目录下)
