@@ -140,19 +140,19 @@ def getPluginVersion(String pluginName) {
     return version
 }
 
-def dexJarsStr="";
 
 buildPlugin.doLast{
-    dexJarsStr=getDexJars(pluginName)
+    def argsList =["--dex","--verbose","--no-strict","--output=$projectDir/$pluginName/dex/plugin_${pluginName}_dex.jar"]
+    new File(projectDir,"$pluginName/jar").listFiles().each { file ->
+        argsList.add(file.absolutePath)
+        println(file.absolutePath)
+    }
+    println(argsList)
     def dexJarTask=tasks.create("buildPluginTemp",Exec){
         workingDir "./$pluginName"
         def androidSDKDir = getAndroidPlugin().sdkHandler.getSdkFolder().absolutePath
         def androidToolDir=androidSDKDir+'/build-tools/'+"${android.buildToolsVersion}"+'/'
-        def argsList =["--dex","--verbose","--no-strict","--output=$projectDir/$pluginName/dex/plugin_${pluginName}_dex.jar"]
         commandLine androidToolDir+"dx"
-        new File("$pluginName/jar").listFiles().each { file ->
-            argsList.add(file.absolutePath)
-        }
         args argsList
         standardOutput = new ByteArrayOutputStream()
     }
@@ -170,14 +170,6 @@ buildPlugin.doLast{
         zipTask.execute()
     }
     dexJarTask.execute()
-}
-
-def getDexJars(def pluginName){
-    def dexJars=""
-    new File("$pluginName/jar").listFiles().each { file ->
-        dexJars+=(" "+file.absolutePath)
-    }
-    return dexJars.substring(1,dexJars.length())
 }
 
 //生成插件包
