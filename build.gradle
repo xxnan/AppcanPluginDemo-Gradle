@@ -152,7 +152,11 @@ buildPlugin.doLast{
         workingDir "./$pluginName"
         def androidSDKDir = getAndroidPlugin().sdkHandler.getSdkFolder().absolutePath
         def androidToolDir=androidSDKDir+'/build-tools/'+"${android.buildToolsVersion}"+'/'
-        commandLine androidToolDir+"dx"
+        if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+            commandLine androidToolDir+"dx.bat"
+        } else {
+            commandLine androidToolDir+"dx"
+        }
         args argsList
         standardOutput = new ByteArrayOutputStream()
     }
