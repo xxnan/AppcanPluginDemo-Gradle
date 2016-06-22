@@ -52,6 +52,6 @@ AppCan Android 插件demo
 
    或者找到 `Gradle(IDE右上角)—>XXX—>Tasks—>other—>buildPlugin  `双击即可
 
-**以uexQQ为例：**
+**以uexQQ为例：**（gif 1.7M）
 
 ![buildPlugin](img/buildPlugin.gif)
