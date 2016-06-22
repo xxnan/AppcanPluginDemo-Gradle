@@ -51,3 +51,7 @@ AppCan Android 插件demo
    - 生成插件包(在插件工程根目录下)
 
    或者找到 `Gradle(IDE右上角)—>XXX—>Tasks—>other—>buildPlugin  `双击即可
+
+**以uexQQ为例：**
+
+![buildPlugin](img/buildPlugin.gif)
