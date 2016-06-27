@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016.  The AppCan Open Source Project.
   ~
   ~  This program is free software: you can redistribute it and/or modify
@@ -18,27 +17,28 @@
   ~
   -->
 
-<manifest package="org.zywx.wbpalmstar.widgetone.uexDemo"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:versionCode="1"
-          android:versionName="3.0"
-          tools:overrideLibrary="org.zywx.wbpalmstar.widgetone.uex">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.zywx.wbpalmstar.widgetone.uexDemo"
+    android:versionCode="1"
+    android:versionName="3.0"
+    tools:overrideLibrary="org.zywx.wbpalmstar.widgetone.uex">
 
     <application
-    >
-        <activity android:name="org.zywx.wbpalmstar.engine.LoadingActivity"
-                  android:configChanges="keyboardHidden|orientation"
-                  android:launchMode="standard"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/browser_loading_theme">
+        android:label="Plugin Demo">
+        <activity
+            android:name="org.zywx.wbpalmstar.engine.LoadingActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/browser_loading_theme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.test.HelloAppCanNativeActivity"/>
+        <activity android:name="com.test.HelloAppCanNativeActivity" />
     </application>
 
 </manifest>
