@@ -54,4 +54,4 @@ AppCan Android 插件demo
 
 **以uexQQ为例：**（gif 1.7M）
 
- ![buildPlugin](../img/buildPlugin.gif)
+ ![buildPlugin](img/buildPlugin.gif)
