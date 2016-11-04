@@ -4,4 +4,5 @@
         uexName="uexDemo" version="3.0.0" build="0">
         <info>0:测试插件Demo</info>
     </plugin>
+
 </uexplugins>

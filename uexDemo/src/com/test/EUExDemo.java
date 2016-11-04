@@ -1,32 +1,23 @@
 package com.test;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.zywx.wbpalmstar.engine.DataHelper;
-import org.zywx.wbpalmstar.engine.EBrowserView;
-import org.zywx.wbpalmstar.engine.universalex.EUExBase;
-import org.zywx.wbpalmstar.engine.universalex.EUExCallback;
-import org.zywx.wbpalmstar.engine.universalex.EUExUtil;
-import org.zywx.wbpalmstar.platform.push.PushBroadCastReceiver;
-
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Vibrator;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import javax.crypto.spec.DHGenParameterSpec;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.zywx.wbpalmstar.engine.DataHelper;
+import org.zywx.wbpalmstar.engine.EBrowserView;
+import org.zywx.wbpalmstar.engine.universalex.EUExBase;
 
 public class EUExDemo extends EUExBase {
 
-    static final String func_activity_callback = "uexDemo.cbStartActivityForResult";
-    static final String func_dialog_callback = "uexDemo.cbTest_showInputDialog";
-    
-    static final String func_on_callback = "javascript:uexDemo.onCallBack";
+    int mFuncActivityCallback =-1;
 
     static final int mMyActivityRequestCode = 10000;
     private static final String TAG = "uexDemo";
@@ -90,6 +81,9 @@ public class EUExDemo extends EUExBase {
 
     // this case start a Activity: HelloAppCanNativeActivity
     public void test_startActivityForResult(String[] parm) {
+        if (parm.length>0) {
+            mFuncActivityCallback = Integer.parseInt(parm[0]);
+        }
         Intent intent = new Intent();
         intent.setClass(mContext, HelloAppCanNativeActivity.class);
         try {
@@ -101,9 +95,9 @@ public class EUExDemo extends EUExBase {
     }
 
     // this case to use Vibrator
-    public void test_vibrator(String[] parm) {
+    public boolean test_vibrator(String[] parm) {
         if (parm.length < 1) {
-            return;
+            return false;
         }
         VibratorDataVO dataVO = DataHelper.gson.fromJson(parm[0], VibratorDataVO.class);
         double inMilliseconds = dataVO.getTime();
@@ -116,11 +110,9 @@ public class EUExDemo extends EUExBase {
         } catch (SecurityException e) {
             Toast.makeText(mContext, "未配置震动权限或参数错误!!", Toast.LENGTH_LONG)
                     .show();
-            return;
+            return false;
         }
-        String jsCallBack = func_on_callback + "('" + "成功震动了" + inMilliseconds
-                + "毫秒" + "');";
-        onCallback(jsCallBack);
+        return true;
     }
 
     // this case show a input dialog
@@ -128,9 +120,13 @@ public class EUExDemo extends EUExBase {
         if (parm.length < 1) {
             return;
         }
+        int funcDialogCallback = -1;
+        if (parm.length>1){
+            funcDialogCallback= Integer.parseInt(parm[1]);
+        }
         DialogDataVO dataVO = DataHelper.gson.fromJson(parm[0], DialogDataVO.class);
         String defaultValue = dataVO.getDefaultValue();
-        new DialogUtil(mContext, this).show(defaultValue);
+        new DialogUtil(mContext, this).show(defaultValue,funcDialogCallback);
     }
 
     // this case show a custom view into window
@@ -204,18 +200,8 @@ public class EUExDemo extends EUExBase {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            callBackPluginJs(func_activity_callback, jsonObject.toString());
+            callbackToJs(mFuncActivityCallback,false,0, jsonObject);
         }
-    }
-
-    public void callbackDialog(String ret) {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("content", ret);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        callBackPluginJs(func_dialog_callback, jsonObject.toString());
     }
 
     public interface OnButtonClick{
